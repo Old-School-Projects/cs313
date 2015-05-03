@@ -4,7 +4,7 @@
     <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="mainstyles.css">
-	<title>Paul's Site | Home</title>
+	<title>Paul's Site | CS 313 Assignments</title>
 
 	<nav id="cssmenu">
             <ul>
@@ -17,7 +17,7 @@
 	</head>
 
 	<body>
-            <img id="mainpic" src="/skydiving.jpg">
+            <?php echo "Coming soon!" ?>
 	</body>
 
 </hmlt>

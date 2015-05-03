@@ -4,7 +4,7 @@
     <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="mainstyles.css">
-	<title>Paul's Site | Home</title>
+	<title>Paul's Site | About Me</title>
 
 	<nav id="cssmenu">
             <ul>
@@ -17,7 +17,14 @@
 	</head>
 
 	<body>
-            <img id="mainpic" src="/skydiving.jpg">
+            <div id="center">
+                <h1>Hi! I'm Paul..</h1>
+                <img src="/hiimpaul.jpg">
+                <p>
+                    I am a Software Engineering student at BYU-Idaho. I am from the San Francisco<br />
+                    Bay Area. I Golden State Warriors fan, and I love to play basketball. 
+                </p>
+            </div>
 	</body>
 
 </hmlt>
