@@ -4,7 +4,7 @@ session_start();
 
 if (isset($_SESSION)) {
 	
-	header('Location: http://localhost/~paul/survey_results.php' );
+	header('Location: http://php-poneill.rhcloud.com/survey_results.php' );
 	//die();	
 	echo "It's set!";
 
