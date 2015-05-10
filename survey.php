@@ -1,6 +1,26 @@
 <?php
 
 session_start();
+
+if (isset($_SESSION)) {
+	
+	header('Location: http://localhost/~paul/survey_results.php' );
+	//die();	
+	echo "It's set!";
+
+} else {
+
+
+	
+	echo "It's NOT set!";
+}
+
+
+
+//string session_id ([ string $id ] );
+
+
+
 ?>
 
 <html>
@@ -22,6 +42,7 @@ session_start();
 	<body>
 		<br />
 		<div id="center">
+
 		<form name="survey" onchange="" action="survey_results.php" method="POST">
 			<h4>What's your gender?</h4>
 			<input type="radio" name="gender" value="male" />Male<br />
@@ -40,7 +61,8 @@ session_start();
             <br />
             <input type="submit" value="Submit">
 		</form>  
+		
 		</div>          
 	</body>
 
-</hmlt>
+</html>

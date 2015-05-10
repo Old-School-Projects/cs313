@@ -42,7 +42,6 @@
 
 			if ($file) {
 				print($file);
-				echo "File was created!";
 			} 
 			else {
 
@@ -60,7 +59,7 @@
 			}
 
 		?>
-		
+
 		</div>
 	</body>
 
