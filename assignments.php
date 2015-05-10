@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="mainstyles.css">
-	<title>Paul's Site | CS 313 Assignments</title>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="mainstyles.css">
+		<title>Paul's Site | CS 313 Assignments</title>
+
 
 	<nav id="cssmenu">
             <ul>
@@ -17,7 +18,14 @@
 	</head>
 
 	<body>
-            <?php echo "Coming soon!" ?>
+		
+		<div id="center">
+			<h2>Assignments</h2>
+			<ul>
+				<li><a href="index.php"><span>Week 2 - Home Page</span></a></li>
+				<li><a href="survey.php"><span>Week 3 - Survey</span></a></li>
+			</ul>
+		</div>
 	</body>
 
 </hmlt>
