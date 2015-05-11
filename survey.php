@@ -2,24 +2,17 @@
 
 session_start();
 
-if (isset($_SESSION)) {
+if (isset($_SESSION[id])) {
 	
+	//header('Location: http://localhost/~paul/survey_results.php');
 	header('Location: http://php-poneill.rhcloud.com/survey_results.php' );
-	//die();	
-	echo "It's set!";
+	die();	
 
 } else {
 
-
-	
-	echo "It's NOT set!";
+		unlink("surveyText.txt");
+		$_SESSION['id'] = "12345";
 }
-
-
-
-//string session_id ([ string $id ] );
-
-
 
 ?>
 

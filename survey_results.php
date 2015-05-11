@@ -5,6 +5,7 @@
 	$meal = $_POST["meal"];
 
 	
+
 ?>
 
 <html>
@@ -36,6 +37,7 @@
 			$results .= "<p>Do you eat breakfast in the morning? <b>$eat</b></p>";
 			$results .= "<p>Do you fall asleep in class ever? <b>$sleep</b></p>";
 			$results .= "<p>What's the most important meal of the day? <b>$meal</b></p>";
+
 
 
 			$file = file_get_contents("surveyText.txt");
