@@ -32,35 +32,126 @@
 
 			<?php 
 
-			$results = "<p>Thank you for taking the survey!</p>";
-			$results .= "<p>You are <b>$gender</b>.</p>";
-			$results .= "<p>Do you eat breakfast in the morning? <b>$eat</b></p>";
-			$results .= "<p>Do you fall asleep in class ever? <b>$sleep</b></p>";
-			$results .= "<p>What's the most important meal of the day? <b>$meal</b></p>";
+			$maleCount = 0;
+			$femaleCount = 0;
+			$bfastY = 0;
+			$bfastN = 0;
+			$sleepY = 0;
+			$sleepN = 0;
+			$breakfast = 0;
+			$lunch = 0;
+			$dinner = 0;
+			$secondBr = 0;
 
+			$list[10];
 
+			$file = fopen("surveyResults.txt", "r");
 
-			$file = file_get_contents("surveyText.txt");
-
+			$count = 0;
 			if ($file) {
-				print($file);
-			} 
-			else {
-
-			$file = fopen("surveyText.txt", "w");
-
-				if ($file){
-					fwrite($file, $results);
-					print($results);
-					fclose($file);
-				} 
-
-				else {
-				die("File could not be found or created!");
+				while ($line = fgets($file)){
+					$list[$count] = intval($line);
+					$count++;
 				}
+			} 
+
+			//*************************************************
+
+			if ($gender == "male"){
+				$maleCount = $list[0];
+				$maleCount++;
+				$list[0] = $maleCount;
+
+			} else {
+				$femaleCount = $list[1];
+				$femaleCount++;
+				$list[1] = $femaleCount;
+
+			}
+
+			if ($eat == "yes"){
+				$bfastY = $list[2];
+				$bfastY++;
+				$list[2] = $bfastY;
+
+			} else {
+				$bfastN = $list[3];
+				$bfastN++;
+				$list[3] = $bfastN;
+			}
+
+			if ($sleep == "yes") {
+				$sleepY = $list[4];
+				$sleepY++;
+				$list[4] = $sleepY;
+
+			} else {
+				$sleepN = $list[5];
+				$sleepN++;
+				$list[5] = $sleepN;
+			}
+
+			if ($meal == "Breakfast"){
+				$breakfast = $list[6];
+				$breakfast++;
+				$list[6] = $breakfast;
+
+			} elseif ($meal == "Lunch") {
+				$lunch = $list[7];
+				$lunch++;
+				$list[7] = $lunch;
+
+			} elseif ($meal == "Dinner") {
+				$dinner = $list[8];
+				$dinner++;
+				$list[8] = $dinner;
+
+			} elseif ($meal == "SecondBreakfast") {
+				$secondBr = $list[9];
+				$secondBr++;
+				$list[9] = $secondBr;
 			}
 
 		?>
+
+
+		<p>
+			This many females took the survey: <?php echo "<b>$list[1]</b>"; ?>
+		</p>
+		<p>
+			This many males took the survey: <?php echo "<b>$list[0]</b>"; ?>
+		</p>
+		<p>
+			Eat breakfast in the morning: <?php echo "<b>$list[2]</b>"; ?>
+		</p>
+		<p>
+			Do not eat breakfast in the morning: <?php echo "<b>$list[3]</b>"; ?>
+		</p>
+		<p>
+			Fall asleep during class: <?php echo "<b>$list[4]</b>"; ?>
+		</p>
+		<p>
+			Do not fall asleep during class: <?php echo "<b>$list[5]</b>"; ?>
+		</p>
+		<p>
+			The most important meal of the day: <br />
+			Breakfast: <?php echo "<b>$list[6]</b>"; ?> <br />
+			Lunch: <?php echo "<b>$list[7]</b>"; ?> <br />
+			Dinner: <?php echo "<b>$list[8]</b>"; ?> <br />
+			SecondBreakfast: <?php echo "<b>$list[9]</b>"; ?> <br />
+		</p>
+
+		<?php
+
+		$results = "";
+		foreach ($list as $key => $thing) {
+   			$results .= "$thing" . "\n";
+		}
+
+		file_put_contents("surveyResults.txt", "$results");
+
+		?>
+
 
 		</div>
 	</body>
