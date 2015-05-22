@@ -24,6 +24,7 @@
 			<ul>
 				<li><a href="index.php"><span>Week 2 - Home Page</span></a></li>
 				<li><a href="survey.php"><span>Week 3 - Survey</span></a></li>
+				<li><a href="alaska_flour/index.php"><span>Week 4-5 - DBs Set up</span></a></li>
 			</ul>
 		</div>
 	</body>

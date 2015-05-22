@@ -17,7 +17,11 @@
 	</head>
 
 	<body>
-            <img id="mainpic" src="/skydiving.jpg">
+            <img id="mainpic" src="skydiving.jpg">
 	</body>
+
+	<footer id="center">
+		<a href="alaska_flour/index.php"><span>Alaska Flour Inc</span></a>
+	</footer>
 
 </hmlt>
