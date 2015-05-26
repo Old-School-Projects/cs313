@@ -94,13 +94,13 @@ catch (PDOException $ex)
       $table .= "<td>" . "<a href='#openModal'>" . $row['first_name'] . " " . $row['last_name'] . "</a>" . "</td>";
       $table .= "</tr>";
 
-      $window = "<div id='openModal' class='modalDialog'><div>
-      <a href='#close' title='Close' class='close'>X</a>
-      <h2>Customer Info</h2>" . $row['title'] . " " . $row['count'] . 
+//       $window = "<div id='openModal' class='modalDialog'><div>
+//       <a href='#close' title='Close' class='close'>X</a>
+//       <h2>Customer Info</h2>" . $row['title'] . " " . $row['count'] . 
 
-      "<input type='button' value='Complete Order'/>
-   </div>
-</div>";
+//       "<input type='button' value='Complete Order'/>
+//    </div>
+// </div>";
       
    }
 
@@ -111,7 +111,7 @@ catch (PDOException $ex)
 
 </div>
 
-<!-- <div id="openModal" class="modalDialog">
+<div id="openModal" class="modalDialog">
    <div>
       <a href="#close" title="Close" class="close">X</a>
       <h2>Customer Info</h2>
@@ -119,7 +119,7 @@ catch (PDOException $ex)
       <p>Here I would also have a button that says complete to complete the order.</p>
       <input type="button" value="Complete Order"/>
    </div>
-</div> -->
+</div>
 
 
 
