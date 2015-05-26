@@ -7,12 +7,12 @@ try
 function loadDatabase()
 {
 
-  $dbHost = "alaska";
-  $dbPort = "localhost";
-  $dbUser = "alaska";
-  $dbPassword = "cool";
+  $dbHost = "";
+  $dbPort = "";
+  $dbUser = "";
+  $dbPassword = "";
 
-     $dbName = "testdb";
+     $dbName = "";
 
      $openShiftVar = getenv('OPENSHIFT_MYSQL_DB_HOST');
 
