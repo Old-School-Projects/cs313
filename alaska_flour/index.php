@@ -15,6 +15,7 @@
 </head>
 <body>
 
+<div id="center">
 <div id='cssmenu'>
 <ul>
    <li class='active'><a href='index.php'>Home</a></li>
@@ -27,6 +28,7 @@
 <?php
 	echo "Coming soon";
 ?>
-
+</div>
 </body>
+
 <html>

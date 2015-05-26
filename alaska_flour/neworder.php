@@ -14,7 +14,8 @@
    <title>Alaska Flour | New Order</title>
 </head>
 <body>
-
+	
+<div id="center">
 <div id='cssmenu'>
 <ul>
    <li class='active'><a href='index.php'>Home</a></li>
@@ -24,7 +25,7 @@
 </ul>
 </div>
 
-<div id="center">
+
 
 	<form action="" method="post">
 		Customer: <input type="text" name="customer_name"><br />
