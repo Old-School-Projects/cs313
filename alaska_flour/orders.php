@@ -64,7 +64,9 @@ catch (PDOException $ex)
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="stylesheet" href="flour.css">
    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
    <script src="script.js"></script>
+   <script src="orderscript.js"></script>
    <title>Alaska Flour | Orders</title>
 </head>
 <body>
@@ -84,23 +86,18 @@ catch (PDOException $ex)
    //$query = "SELECT * FROM food_item fi JOIN orders o ON fi.id = o.customer_id";
    $query = "SELECT * FROM food_item fi JOIN customer c ON fi.id = c.id";
 
-   $table = "<table id='customers'><tr><th>Order #</th><th>Customer</th></tr>";
-
+   $table = "<table class='customers' id='orders'><th></th><th>Customer</th><th>Time of Order</th><th>  </th><th>  </th>";
    $stmt = $db->query($query);
    while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
    {
+
       $table .= "<tr>";
-      $table .= "<td>" . $row['id'] . "</td>";
-      $table .= "<td>" . "<a href='#openModal'>" . $row['first_name'] . " " . $row['last_name'] . "</a>" . "</td>";
+      $table .= "<td>" . "<input type='image' src='images/complete.jpg' name='complete' id='complete'/> </td>";
+      $table .= '<td>' . "<span id='spanTitle" . $row['id'] . "' onclick='ajaxFunc(" . $row['id'] . ");'>" . $row['first_name'] . " " . $row['last_name'] .
+       "</span>" . "<div id='divDetails" . $row['id'] . "'></div></td>";
+      $table .= "<td>Time stamp</td><td><input type='image' src='images/delete.jpg' name='delete' id='delete'/></td>";
+      $table .= "<td><input type='image' src='images/edit.jpg' name='edit' id='edit'/></td>";
       $table .= "</tr>";
-
-//       $window = "<div id='openModal' class='modalDialog'><div>
-//       <a href='#close' title='Close' class='close'>X</a>
-//       <h2>Customer Info</h2>" . $row['title'] . " " . $row['count'] . 
-
-//       "<input type='button' value='Complete Order'/>
-//    </div>
-// </div>";
       
    }
 
@@ -108,6 +105,8 @@ catch (PDOException $ex)
 
    echo $table;
 ?>
+
+<h2>Items Ready for Shipment</h2>
 
 </div>
 
@@ -121,9 +120,15 @@ catch (PDOException $ex)
    </div>
 </div>
 
+<!-- $window = "<div id='openModal' class='modalDialog'><div>
+      <a href='#close' title='Close' class='close'>X</a>
+      <h2>" . $row['first_name'] . " " . $row['last_name'] . "</h2>" . $row['title'] . " " . $row['count'] . 
 
+      "<br /><br /><input type='button' value='Complete Order'/>
+      </div>
+      </div>";
 
-
+      echo $window; -->
 
 </body>
 <html>

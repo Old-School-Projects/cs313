@@ -7,12 +7,12 @@ try
 function loadDatabase()
 {
 
-  $dbHost = "";
-  $dbPort = "";
-  $dbUser = "";
-  $dbPassword = "";
+  $dbHost = "alaska";
+  $dbPort = "localhost";
+  $dbUser = "alaska";
+  $dbPassword = "cool";
 
-     $dbName = "alaska";
+     $dbName = "testdb";
 
      $openShiftVar = getenv('OPENSHIFT_MYSQL_DB_HOST');
 
@@ -86,7 +86,7 @@ catch (PDOException $ex)
    $query = "SELECT * FROM customer";
 
 
-   $table = "<table id='customers'><tr><th>Last</th><th>First</th><th>Phone Number</th></tr>";
+   $table = "<table class='customers'><tr><th>Last</th><th>First</th><th>Phone Number</th></tr>";
 
 
    $stmt = $db->query($query);

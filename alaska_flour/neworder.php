@@ -14,7 +14,7 @@
    <title>Alaska Flour | New Order</title>
 </head>
 <body>
-	
+
 <div id="center">
 <div id='cssmenu'>
 <ul>
@@ -24,13 +24,16 @@
    <li><a href='neworder.php'>New Order</a></li>
 </ul>
 </div>
+</div>
 
-
+<div id="center">
 
 	<form action="" method="post">
-		Customer: <input type="text" name="customer_name"><br />
+		<label>Customer: </label><input type="text" name="customer_name" id="customer_name"><br />
+		<label>Phone: </label><input type="text" name="cust_phone" id="cust_phone"><br />
 		<hr />
-		<table id="customers">
+
+		<table class="customers">
 			<tr>
 				<th>Item No.</th>
 				<th>Product Description</th>
@@ -49,7 +52,7 @@
 				<td>867184000048</td>
 				<td>48</td>
 				<td>5.00</td>
-				<td><input type="text" name="item_01"></td>
+				<td><input type="text" name="item_01" id="item_01"></td>
 			</tr>
 			<tr class="alt">
 				<td>02</td>
@@ -59,7 +62,7 @@
 				<td>713757518222</td>
 				<td>40</td>
 				<td>10.00</td>
-				<td><input type="text" name="item_02"></td>
+				<td><input type="text" name="item_02" id="item_02"></td>
 			</tr>
 			<tr>
 				<td>03</td>
@@ -69,7 +72,7 @@
 				<td>713757518221</td>
 				<td>40</td>
 				<td>15.00</td>
-				<td><input type="text" name="item_03"></td>
+				<td><input type="text" name="item_03" id="item_03"></td>
 			</tr>
 			<tr class="alt">
 				<td>04</td>
@@ -79,7 +82,7 @@
 				<td>-</td>
 				<td>25</td>
 				<td>50.00</td>
-				<td><input type="text" name="item_04"></td>
+				<td><input type="text" name="item_04" id="item_04"></td>
 			</tr>
 			<tr>
 				<td>05</td>
@@ -89,7 +92,7 @@
 				<td>867184000086</td>
 				<td>48</td>
 				<td>6.00</td>
-				<td><input type="text" name="item_05"></td>
+				<td><input type="text" name="item_05" id="item_05"></td>
 			</tr >
 			<tr class="alt">
 				<td>06</td>
@@ -99,7 +102,7 @@
 				<td>867184000093</td>
 				<td>40</td>
 				<td>25.00</td>
-				<td><input type="text" name="item_06"></td>
+				<td><input type="text" name="item_06" id="item_06"></td>
 			</tr>
 			<tr>
 				<td>07</td>
@@ -109,7 +112,7 @@
 				<td></td>
 				<td>25</td>
 				<td>50.00</td>
-				<td><input type="text" name="item_07"></td>
+				<td><input type="text" name="item_07" id="item_07"></td>
 			</tr>
 			<tr class="alt">
 				<td>08</td>
@@ -119,7 +122,7 @@
 				<td>867184000062</td>
 				<td>36</td>
 				<td>7.00</td>
-				<td><input type="text" name="item_08"></td>
+				<td><input type="text" name="item_08" id="item_08"></td>
 			</tr>
 			<tr>
 				<td>09</td>
@@ -129,7 +132,7 @@
 				<td>867466000063</td>
 				<td>36</td>
 				<td>7.80</td>
-				<td><input type="text" name="item_09"></td>
+				<td><input type="text" name="item_09" id="item_09"></td>
 			</tr>
 			<tr class="alt">
 				<td>10</td>
@@ -139,7 +142,7 @@
 				<td>867184000079</td>
 				<td>18</td>
 				<td>4.25</td>
-				<td><input type="text" name="item_10"></td>
+				<td><input type="text" name="item_10" id="item_10"></td>
 			</tr>
 			<tr>
 				<td>11</td>
@@ -149,7 +152,7 @@
 				<td>867466000025</td>
 				<td>24</td>
 				<td>6.00</td>
-				<td><input type="text" name="item_11"></td>
+				<td><input type="text" name="item_11" id="item_11"></td>
 			</tr>
 			<tr class="alt">
 				<td>12</td>
@@ -159,7 +162,7 @@
 				<td>867466000087</td>
 				<td>24</td>
 				<td>4.25</td>
-				<td><input type="text" name="item_12"></td>
+				<td><input type="text" name="item_12" id="item_12"></td>
 			</tr>
 			<tr>
 				<td>13</td>
@@ -169,7 +172,7 @@
 				<td>867466000070</td>
 				<td>24</td>
 				<td>4.25</td>
-				<td><input type="text" name="item_13"></td>
+				<td><input type="text" name="item_13" id="item_13"></td>
 			</tr>
 			<tr class="alt">
 				<td>14</td>
@@ -179,7 +182,7 @@
 				<td></td>
 				<td>25</td>
 				<td>50.00</td>
-				<td><input type="text" name="item_14"></td>
+				<td><input type="text" name="item_14" id="item_14"></td>
 			</tr>
 			<tr>
 				<td>15</td>
@@ -189,7 +192,7 @@
 				<td>713757517829</td>
 				<td>48</td>
 				<td>5.00</td>
-				<td><input type="text" name="item_15"></td>
+				<td><input type="text" name="item_15" id="item_15"></td>
 			</tr>
 			<tr class="alt">
 				<td>16</td>
@@ -199,7 +202,7 @@
 				<td>713757517928</td>
 				<td>40</td>
 				<td>8.75</td>
-				<td><input type="text" name="item_16"></td>
+				<td><input type="text" name="item_16" id="item_16"></td>
 			</tr>
 			<tr>
 				<td>17</td>
@@ -209,7 +212,7 @@
 				<td>713757518024</td>
 				<td>40</td>
 				<td>15.00</td>
-				<td><input type="text" name="item_17"></td>
+				<td><input type="text" name="item_17" id="item_17"></td>
 			</tr>
 			<tr class="alt">
 				<td>18</td>
@@ -219,7 +222,7 @@
 				<td>867184000031</td>
 				<td>25</td>
 				<td>25.00</td>
-				<td><input type="text" name="item_18"></td>
+				<td><input type="text" name="item_18" id="item_18"></td>
 			</tr>
 		</table>
 
