@@ -79,7 +79,7 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $db->exec($query);
 
-echo "I GOT THIS FAR!";
+
 
 
 
