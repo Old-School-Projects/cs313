@@ -1,0 +1,17 @@
+INSERT INTO movie(title, year) VALUES('Star Wars: A New Hope', 1977), ('Star Wars: The Empire Strikes Back', 1980);
+
+INSERT INTO actor(name) VALUES ('James Earl Jones'), ('Mark Hamill');
+
+
+
+
+
+
+SELECT * FROM actor a
+JOIN moveActor ma ON a.id = ma.actorId;
+JOIN movie m ON ma.moveId = m.id;
+
+
+
+// Select all the movies that Mark Hamill has been in
+

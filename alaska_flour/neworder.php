@@ -1,5 +1,120 @@
 <?php
 
+$f_name = $_POST['first_name'];
+$l_name = $_POST['last_name'];
+$cust_phone = $_POST['cust_phone'];
+$str_name = $_POST['str_name'];
+$str_num = $_POST['str_num'];
+$city = $_POST['city'];
+$state = $_POST['state'];
+$zip = $_POST['zip'];
+$item_01 = $_POST['item_01'];
+$item_01_title = "Cream of Barley Breakfast Cereal #1";
+$item_02 = $_POST['item_02'];
+$item_02_title = "Cream of Barley Breakfast Cereal #2";
+$item_03 = $_POST['item_03'];
+$item_03_title = "Cream of Barley Breakfast Cereal #3";
+$item_04 = $_POST['item_04'];
+$item_04_title = "Cream of Barley Breakfast Cereal #4";
+$item_05 = $_POST['item_05'];
+$item_05_title = "Couscous";
+$item_06 = $_POST['item_06'];
+$item_06_title = "Barley Couscous #1";
+$item_07 = $_POST['item_07'];
+$item_07_title = "Barley Couscous #2";
+$item_08 = $_POST['item_08'];
+$item_08_title = "Great Alaska Pancake Mix";
+$item_09 = $_POST['item_09'];
+$item_09_title = "Cinnamon Chip Pancake Mix";
+$item_10 = $_POST['item_10'];
+$item_10_title = "Roasted Barley Tea #1";
+$item_11 = $_POST['item_11'];
+$item_11_title = "Roasted Barley Tea #2";
+$item_12 = $_POST['item_12'];
+$item_12_title = "Kodiak Chocolate Chip Cookies";
+$item_13 = $_POST['item_13'];
+$item_13_title = "Black Gold Brownie Mix";
+$item_14 = $_POST['item_14'];
+$item_14_title = "Cracked Barley";
+$item_15 = $_POST['item_15'];
+$item_15_title = "Barley Flour #1";
+$item_16 = $_POST['item_16'];
+$item_16_title = "Barley Flour #2";
+$item_17 = $_POST['item_17'];
+$item_17_title = "Barley Flour #3";
+$item_18 = $_POST['item_18'];
+$item_18_title = "Barley Flour #4";
+
+
+$order_array = array($item_01 => '$item_01_title', $item_02 => $item_02_title, $item_03 => $item_03_title, 
+	$item_04 => $item_04_title, $item_05 => $item_05_title, $item_06 => $item_06_title, $item_07 => $item_07_title, 
+	$item_08 => $item_08_title, $item_09 => $item_09_title, $item_10 => $item_10_title, $item_11 => $item_11_title, 
+	$item_12 => $item_12_title, $item_13 => $item_13_title, $item_14 => $item_14_title, $item_15 => $item_15_title, 
+	$item_16 => $item_16_title, $item_17 => $item_17_title, $item_18 => $item_18_title);
+
+$count = 0;
+foreach ($order_array as $key => $value){
+	echo $count . "<br />";
+	$count++;
+		//$query = "INSERT INTO  food_item (title, count) VALUES ('', '$value');";
+	echo $value . " key= " . $order_array[$key] . "<br />";	 
+}
+
+
+try
+{
+
+function loadDatabase()
+{
+
+  $dbHost = "";
+  $dbPort = "";
+  $dbUser = "";
+  $dbPassword = "";
+
+     $dbName = "alaska";
+
+     $openShiftVar = getenv('OPENSHIFT_MYSQL_DB_HOST');
+
+     if ($openShiftVar === null || $openShiftVar == "")
+     {
+          // Not in the openshift environment
+          //echo "Using local credentials: "; 
+          $user = 'alaska';
+         $password = 'cool';
+         $dbhost = 'localhost';
+         $dbName = 'alaska';
+
+         $db = new PDO("mysql:host=[$dbhost];dbname=$dbName", $user, $password);
+     }
+     else 
+     { 
+          // In the openshift environment
+          //echo "Using openshift credentials: ";
+
+          $dbHost = getenv('OPENSHIFT_MYSQL_DB_HOST');
+          $dbPort = getenv('OPENSHIFT_MYSQL_DB_PORT'); 
+          $dbUser = getenv('OPENSHIFT_MYSQL_DB_USERNAME');
+          $dbPassword = getenv('OPENSHIFT_MYSQL_DB_PASSWORD');
+
+          $db = new PDO("mysql:host=$dbHost:$dbPort;dbname=$dbName", $dbUser, $dbPassword);
+     } 
+     //echo "host:$dbHost:$dbPort dbName:$dbName user:$dbUser password:$dbPassword<br >\n";
+
+     return $db;
+
+}
+
+   $db = loadDatabase();
+
+}
+catch (PDOException $ex)
+{
+   echo "Error: " . $ex->getMessage();
+   die();
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +126,7 @@
    <link rel="stylesheet" href="flour.css">
    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
    <script src="script.js"></script>
+   <script src="orderscript.js"></script>
    <title>Alaska Flour | New Order</title>
 </head>
 <body>
@@ -27,12 +143,20 @@
 </div>
 
 <div id="center">
-
-	<form action="" method="post">
-		<label>Customer: </label><input type="text" name="customer_name" id="customer_name"><br />
-		<label>Phone: </label><input type="text" name="cust_phone" id="cust_phone"><br />
+	<h2>New Order</h2>
+	<form action="#" method="post">
+		<div id="customer_info">
+		<label>First Name </label><input type="text" name="first_name" id="first_name"><br />
+		<label>Last Name </label><input type="text" name="last_name" id="last_name"><br />
+		<label>Phone </label><input type="text" name="cust_phone" id="cust_phone"><br />
+		<h4>Address</h4>
+		<label>Street Name </label><input type="text" name="str_name" id="str_name"><br />
+		<label>Street Num </label><input type="text" name="str_num" id="str_num"><br />
+		<label>City </label><input type="text" name="city" id="city"><br />
+		<label>State </label><input type="text" name="state" id="state"><br />
+		<label>Zip </label><input type="text" name="zip" id="zip"><br />
 		<hr />
-
+		</div>
 		<table class="customers">
 			<tr>
 				<th>Item No.</th>
@@ -233,7 +357,41 @@
 
 </div>
 
+<?php
+
+// the isset is to make sure that it doesn't try to run the query when this page loads
+// if (isset($f_name)) {
+// 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// // insert customer info
+// $query = "INSERT INTO customer (first_name,last_name,phone_num) VALUES ('$f_name', '$l_name', '$cust_phone');";
+
+// $db->exec($query);
+
+// echo "HERE HERE HERE!";
+
+// // insert address info
+// $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+// $query = "INSERT INTO address (street_name, street_num, city, state, zip) VALUES ('$str_name', '$str_num', '$city', '$state', '$zip');";
+
+// $db->exec($query);
+
+// //$query = "INSERT INTO customer (first_name,last_name,phone_num) VALUES ('$f_name', '$l_name', '$cust_phone');";
+
+// // insert order info
+
+
+
+// }
+
+
+// }
+
+
+
+
+?>
 
 
 </body>
-<html>
+</html>

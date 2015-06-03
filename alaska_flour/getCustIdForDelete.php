@@ -1,4 +1,5 @@
 <?php
+$id = $_POST['customerId'];
 
 
 try
@@ -25,7 +26,6 @@ function loadDatabase()
          $dbhost = 'localhost';
          $dbName = 'alaska';
 
-
          $db = new PDO("mysql:host=[$dbhost];dbname=$dbName", $user, $password);
      }
      else 
@@ -42,8 +42,6 @@ function loadDatabase()
      } 
      //echo "host:$dbHost:$dbPort dbName:$dbName user:$dbUser password:$dbPassword<br >\n";
 
-     
-
      return $db;
 
 }
@@ -57,56 +55,38 @@ catch (PDOException $ex)
    die();
 }
 
+$query = "DELETE FROM address WHERE id = $id;";
+
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$db->exec($query);
+
+$query = "DELETE FROM customer WHERE id = $id;";
+
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$db->exec($query);
+
+$query = "DELETE FROM foodorder WHERE food_item_id = $id;";
+
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$db->exec($query);
+
+$query = "DELETE FROM foodorder WHERE order_id = $id;";
+
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$db->exec($query);
+
+echo "I GOT THIS FAR!";
+
+
+
 ?>
 
-<!DOCTYPE html>
-<html lang=''>
-<head>
-   <meta charset='utf-8'>
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="stylesheet" href="flour.css">
-   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-   <script src="script.js"></script>
-   <title>Alaska Flour | Customers</title>
-</head>
-<body>
-
-<div id="center">
-<div id='cssmenu'>
-<ul>
-   <li class='active'><a href='index.php'>Home</a></li>
-   <li><a href='orders.php'>Orders</a></li>
-   <li><a href='customers.php'>Customers</a></li>
-   <li><a href='neworder.php'>New Order</a></li>
-</ul>
-</div>
-<h2>Customers</h2>
-<?php
-   $query = "SELECT * FROM customer";
-
-
-   $table = "<table class='customers'><tr><th>Last</th><th>First</th><th>Phone Number</th></tr>";
-
-
-   $stmt = $db->query($query);
-   while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
-   {
-      $table .= '<tr>';
-      $table .= '<td>' . $row['last_name'] . '</td>';
-      $table .= '<td>' . $row['first_name'] . '</td>';
-      $table .= '<td>' . $row['phone_num'] . '</td>'; 
-      $table .= '</tr>';
-   }
-
-   $table .= "</table>";
-
-   echo $table;
-
-?>
-</div>
 
 
 
-</body>
-<html>
+
+

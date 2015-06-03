@@ -1,5 +1,4 @@
 <?php
-
 $id = $_POST['customerId'];
 
 try
@@ -55,18 +54,24 @@ catch (PDOException $ex)
    die();
 }
 
-$query = "SELECT title, count FROM customer c LEFT OUTER JOIN foodOrder f ON c.id = f.order_id LEFT OUTER JOIN food_item fi ON fi.id = f.food_item_id WHERE order_id = $id;";
+$query = "SELECT * FROM customer c LEFT OUTER JOIN foodOrder f ON c.id = f.order_id LEFT OUTER JOIN food_item fi ON fi.id = f.food_item_id WHERE order_id = $id;";
 //$query = "SELECT * FROM customer LEFT OUTER JOIN orders ON customer.id = orders.customer_id LEFT OUTER JOIN food_item ON orders.id = food_item.id WHERE orders.customer_id=$id;";
 //$query = "SELECT * FROM food_item WHERE id = $id";
 $stmt = $db->query($query);
+$counter = 0;
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 {
-	echo $row['title'] . " - QUANTITY: " . $row['count'] . "<br />";
+	if ($count < 1){
+		echo "<b>" . $row['first_name'] . " " . $row['last_name'] . "</b><br />";
+		echo $row['title'] . "  -Quantity:  " . $row['count'] . "<br />";
+	} else {
+		echo $row['title'] . "  -Quantity:  " . $row['count'] . "<br />";
+	}
+	echo "<br />";
+	echo "New Item Title: <input type='text' name='newItemTitle" . $count . "' id='newItemTitle" . $count . "'> Count: <input type='text' name='newCount' id='newCount'> <br /><br />";
+
+	$count++;
+	
 }
 
 ?>
-
-
-
-
-

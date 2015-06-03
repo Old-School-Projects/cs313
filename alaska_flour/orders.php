@@ -1,6 +1,8 @@
 <?php
 
 
+
+
 try
 {
 
@@ -54,6 +56,10 @@ catch (PDOException $ex)
    die();
 }
 
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -67,6 +73,11 @@ catch (PDOException $ex)
    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
    <script src="script.js"></script>
    <script src="orderscript.js"></script>
+   <script type="text/javascript">
+    setTimeout(function(){
+        lengthCheck();
+      }, 3000);
+   </script>
    <title>Alaska Flour | Orders</title>
 </head>
 <body>
@@ -83,6 +94,7 @@ catch (PDOException $ex)
 <h2>Open Orders</h2>
 
 <?php
+
    //$query = "SELECT * FROM food_item fi JOIN orders o ON fi.id = o.customer_id";
    $query = "SELECT * FROM food_item fi JOIN customer c ON fi.id = c.id";
 
@@ -92,43 +104,54 @@ catch (PDOException $ex)
    {
 
       $table .= "<tr>";
-      $table .= "<td>" . "<input type='image' src='images/complete.jpg' name='complete' id='complete'/> </td>";
-      $table .= '<td>' . "<span id='spanTitle" . $row['id'] . "' onclick='ajaxFunc(" . $row['id'] . ");'>" . $row['first_name'] . " " . $row['last_name'] .
-       "</span>" . "<div id='divDetails" . $row['id'] . "'></div></td>";
-      $table .= "<td>Time stamp</td><td><input type='image' src='images/delete.jpg' name='delete' id='delete'/></td>";
-      $table .= "<td><input type='image' src='images/edit.jpg' name='edit' id='edit'/></td>";
+      $table .= "<td><a href='#openModalConfirm' onclick='completeFunc(" . $row['id'] . ")'><img src='images/complete.jpg' id='complete'></a></td>";
+      $table .= '<td><b>' . "<span id='spanTitle" . $row['id'] . "' onclick='ajaxFunc(" . $row['id'] . ");'>"
+       . $row['first_name'] . " " . $row['last_name'] . "</span></b>" . "<div id='divDetails" . $row['id'] . "'></div></td>";
+      $table .= "<td>Time stamp</td><td><a href='#openModalDelete' onclick='deleteFunc(" . $row['id'] . ")'><img src='images/delete.jpg' id='delete'></a></td>";
+      $table .= "<td><a href='#openModalEdit' onclick='modalFunc(" . $row['id'] . ")'><img src='images/edit.jpg' id='edit'></a></td>";
       $table .= "</tr>";
-      
+
    }
 
    $table .= "</table>";
 
    echo $table;
+
 ?>
+
 
 <h2>Items Ready for Shipment</h2>
 
 </div>
 
-<div id="openModal" class="modalDialog">
+<div id="openModalDelete" class="modalDialog">
    <div>
       <a href="#close" title="Close" class="close">X</a>
-      <h2>Customer Info</h2>
-      <p>Here the customer's name, address and order will be display.</p>
-      <p>Here I would also have a button that says complete to complete the order.</p>
-      <input type="button" value="Complete Order"/>
+      <p>Are you sure you want to delete this order?</p>
+      <div id="deleteMessage"></div>
+      <input type="button" value="Confirm"/>
    </div>
 </div>
 
-<!-- $window = "<div id='openModal' class='modalDialog'><div>
-      <a href='#close' title='Close' class='close'>X</a>
-      <h2>" . $row['first_name'] . " " . $row['last_name'] . "</h2>" . $row['title'] . " " . $row['count'] . 
+<div id="openModalEdit" class="modalDialog">
+   <div>
+      <a href="#close" title="Close" class="close">X</a>
+      <p>Edit Customer Info</p>
+      <div id="editMessage"></div>
+      <input type="button" value="Okay"/>
+   </div>
+</div>
 
-      "<br /><br /><input type='button' value='Complete Order'/>
-      </div>
-      </div>";
+<div id="openModalConfirm" class="modalDialog">
+   <div>
+      <a href="#close" title="Close" class="close">X</a>
+      <p>Are you sure you want to process this order?</p>
+      <div id="confirmMessage"></div>
+      <input type="button" value="Confirm"/>
+   </div>
+</div>
 
-      echo $window; -->
 
 </body>
-<html>
+</html>
+
