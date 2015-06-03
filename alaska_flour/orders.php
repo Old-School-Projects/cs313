@@ -120,7 +120,7 @@ catch (PDOException $ex)
 ?>
 
 
-<h2>Items Ready for Shipment</h2>
+
 
 </div>
 
