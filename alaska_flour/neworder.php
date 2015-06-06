@@ -1,7 +1,7 @@
 <?php
 
 $f_name = $_POST['first_name'];
-$l_name = $_POST['last_name'];
+$l_name = $_POST["last_name"];
 $cust_phone = $_POST['cust_phone'];
 $str_name = $_POST['str_name'];
 $str_num = $_POST['str_num'];
@@ -17,11 +17,11 @@ $item_03_title = "Cream of Barley Breakfast Cereal #3";
 $item_04 = $_POST['item_04'];
 $item_04_title = "Cream of Barley Breakfast Cereal #4";
 $item_05 = $_POST['item_05'];
-$item_05_title = "Couscous";
+$item_05_title = "Barley Couscous #1";
 $item_06 = $_POST['item_06'];
-$item_06_title = "Barley Couscous #1";
+$item_06_title = "Barley Couscous #2";
 $item_07 = $_POST['item_07'];
-$item_07_title = "Barley Couscous #2";
+$item_07_title = "Barley Couscous #3";
 $item_08 = $_POST['item_08'];
 $item_08_title = "Great Alaska Pancake Mix";
 $item_09 = $_POST['item_09'];
@@ -46,19 +46,11 @@ $item_18 = $_POST['item_18'];
 $item_18_title = "Barley Flour #4";
 
 
-$order_array = array($item_01 => '$item_01_title', $item_02 => $item_02_title, $item_03 => $item_03_title, 
-	$item_04 => $item_04_title, $item_05 => $item_05_title, $item_06 => $item_06_title, $item_07 => $item_07_title, 
-	$item_08 => $item_08_title, $item_09 => $item_09_title, $item_10 => $item_10_title, $item_11 => $item_11_title, 
-	$item_12 => $item_12_title, $item_13 => $item_13_title, $item_14 => $item_14_title, $item_15 => $item_15_title, 
-	$item_16 => $item_16_title, $item_17 => $item_17_title, $item_18 => $item_18_title);
-
-$count = 0;
-foreach ($order_array as $key => $value){
-	echo $count . "<br />";
-	$count++;
-		//$query = "INSERT INTO  food_item (title, count) VALUES ('', '$value');";
-	echo $value . " key= " . $order_array[$key] . "<br />";	 
-}
+$order_array = array($item_01_title => $item_01, $item_02_title => $item_02, $item_03_title => $item_03, 
+	$item_04_title => $item_04, $item_05_title => $item_05, $item_06_title => $item_06, $item_07_title => $item_07, 
+	$item_08_title => $item_08, $item_09_title => $item_09, $item_10_title => $item_10, $item_11_title => $item_11, 
+	$item_12_title => $item_12, $item_13_title => $item_13, $item_14_title => $item_14, $item_15_title => $item_15, 
+	$item_16_title => $item_16, $item_17_title => $item_17, $item_18_title => $item_18);
 
 
 try
@@ -359,35 +351,66 @@ catch (PDOException $ex)
 
 <?php
 
-// the isset is to make sure that it doesn't try to run the query when this page loads
-// if (isset($f_name)) {
-// 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-// // insert customer info
-// $query = "INSERT INTO customer (first_name,last_name,phone_num) VALUES ('$f_name', '$l_name', '$cust_phone');";
-
-// $db->exec($query);
-
-// echo "HERE HERE HERE!";
-
-// // insert address info
-// $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-// $query = "INSERT INTO address (street_name, street_num, city, state, zip) VALUES ('$str_name', '$str_num', '$city', '$state', '$zip');";
-
-// $db->exec($query);
-
-// //$query = "INSERT INTO customer (first_name,last_name,phone_num) VALUES ('$f_name', '$l_name', '$cust_phone');";
-
-// // insert order info
 
 
+//the isset is to make sure that it doesn't try to run the query when this page loads
+if (isset($f_name)) {
+	//$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// insert customer info
+$query = $db->prepare("INSERT INTO customer (first_name,last_name,phone_num) VALUES (:f_name, :l_name, :cust_phone)");
+$query->bindParam(':f_name', $f_name, PDO::PARAM_STR);
+$query->bindParam(':l_name', $l_name, PDO::PARAM_STR);
+$query->bindParam(':cust_phone', $cust_phone, PDO::PARAM_INT);
+$query->execute();
 
-// }
+$customerId = $db->lastInsertId();
+
+// insert address info
+//$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$query = $db->prepare("INSERT INTO address (street_name, street_num, city, state, zip) VALUES (:str_name, :str_num, :city, :state, :zip)");
+$query->bindParam(':str_name', $str_name, PDO::PARAM_STR);
+$query->bindParam(':str_num', $str_num, PDO::PARAM_INT);
+$query->bindParam(':city', $city, PDO::PARAM_STR);
+$query->bindParam(':state', $state, PDO::PARAM_STR);
+$query->bindParam(':zip', $zip, PDO::PARAM_INT);
+$query->execute();
+
+// insert new order
+//$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$query = $db->prepare("INSERT INTO orders (customer_id) VALUES ('$customerId')");
+
+$query->execute();
+
+$orderId = $db->lastInsertId();
 
 
-// }
+// insert order info
+foreach ($order_array as $key => $value){
+	if ($value > 0){
+		echo $value . " " . $key . "<br />";
+		//$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$query = $db->prepare("INSERT INTO  food_item (title, count) VALUES (:key, :value)");
+		$query->bindParam(':key', $key, PDO::PARAM_STR);
+		$query->bindParam(':value', $value, PDO::PARAM_INT);
+		$query->execute();
+
+		$f_item_id = $db->lastInsertId();
+
+		// foodorder
+		//$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$query = $db->prepare("INSERT INTO foodorder (food_item_id, order_id) VALUES (:f_item_id, :orderId)");
+		$query->bindParam(':f_item_id', $f_item_id, PDO::PARAM_INT);
+		$query->bindParam(':orderId', $orderId, PDO::PARAM_INT);
+		$query->execute();
+
+	}
+			 
+}
 
 
+}
 
 
 ?>

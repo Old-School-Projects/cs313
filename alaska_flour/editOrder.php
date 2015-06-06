@@ -1,4 +1,5 @@
 <?php
+
 $id = $_POST['customerId'];
 
 
@@ -55,36 +56,35 @@ catch (PDOException $ex)
    die();
 }
 
-$query = "DELETE FROM address WHERE id = $id;";
 
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-$db->exec($query);
-
-$query = "DELETE FROM customer WHERE id = $id;";
-
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-$db->exec($query);
-
-$query = "DELETE FROM foodorder WHERE food_item_id = $id;";
-
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-$db->exec($query);
-
-$query = "DELETE FROM foodorder WHERE order_id = $id;";
-
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-$db->exec($query);
 
 
 
 ?>
 
-
-
+<!DOCTYPE html>
+<html lang=''>
+<head>
+   <meta charset='utf-8'>
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="flour.css">
+   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   <script src="script.js"></script>
+   <script src="orderscript.js"></script>
+   <script type="text/javascript">
+    setTimeout(function(){
+        lengthCheck();
+      }, 3000);
+   </script>
+   <title>Alaska Flour | Orders</title>
+</head>
+<body id="center">
+  <h1>Order Edit</h1>
+  
+</body>
+</html>
 
 
 

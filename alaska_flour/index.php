@@ -24,11 +24,12 @@
    <li><a href='neworder.php'>New Order</a></li>
 </ul>
 </div>
+<?php
+   echo "Coming soon";
+?>
 </div>
 
-<?php
-	echo "Coming soon";
-?>
+
 
 </body>
 <html>

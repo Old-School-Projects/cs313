@@ -17,18 +17,18 @@ function lengthCheck(){
 
 
 function ajaxFunc(id) {
-	//alert("fetching the data for id: " + id);
 	var divId = "#divDetails" + id;
 
 	$.post("getCustomerId.php", {customerId: id}, function(results){
 		$(divId).html(results);	
 		$(divId).slideToggle("slow");
+
 		//$("#editMessage").html(results);	
 	});
 
 }
 
-function modalFunc(id) {
+function editFunc(id) {
 	var divId = "#editMessage";
 
 	$.post("getCustIdForEdit.php", {customerId: id}, function(results){

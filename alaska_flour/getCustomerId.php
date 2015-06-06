@@ -55,10 +55,10 @@ catch (PDOException $ex)
    die();
 }
 
-$query = "SELECT title, count FROM customer c LEFT OUTER JOIN foodOrder f ON c.id = f.order_id LEFT OUTER JOIN food_item fi ON fi.id = f.food_item_id WHERE order_id = $id;";
-//$query = "SELECT * FROM customer LEFT OUTER JOIN orders ON customer.id = orders.customer_id LEFT OUTER JOIN food_item ON orders.id = food_item.id WHERE orders.customer_id=$id;";
-//$query = "SELECT * FROM food_item WHERE id = $id";
+//$query = "SELECT title, count FROM customer c LEFT OUTER JOIN foodOrder f ON c.id = f.order_id LEFT OUTER JOIN food_item fi ON fi.id = f.food_item_id WHERE order_id = $id;";
+$query = "SELECT * FROM food_item fi JOIN foodorder fo ON fi.id=fo.food_item_id LEFT OUTER JOIN orders o ON fo.order_id=o.id WHERE o.customer_id=$id"; //WHERE orders.customer_id=$id;";
 $stmt = $db->query($query);
+
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 {
 	echo $row['title'] . " - QUANTITY: " . $row['count'] . "<br />";

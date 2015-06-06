@@ -95,22 +95,20 @@ catch (PDOException $ex)
 
 <?php
 
-   //$query = "SELECT * FROM food_item fi JOIN orders o ON fi.id = o.customer_id";
-   $query = "SELECT * FROM food_item fi JOIN customer c ON fi.id = c.id";
-
+   $query = "SELECT * FROM customer";
    $table = "<table class='customers' id='orders'><th></th><th>Customer</th><th>Time of Order</th><th>  </th><th>  </th>";
    $stmt = $db->query($query);
+   $id;
    while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
    {
-
       $table .= "<tr>";
       $table .= "<td><a href='#openModalConfirm' onclick='completeFunc(" . $row['id'] . ")'><img src='images/complete.jpg' id='complete'></a></td>";
       $table .= '<td><b>' . "<span id='spanTitle" . $row['id'] . "' onclick='ajaxFunc(" . $row['id'] . ");'>"
        . $row['first_name'] . " " . $row['last_name'] . "</span></b>" . "<div id='divDetails" . $row['id'] . "'></div></td>";
-      $table .= "<td>Time stamp</td><td><a href='#openModalDelete' onclick='deleteFunc(" . $row['id'] . ")'><img src='images/delete.jpg' id='delete'></a></td>";
-      $table .= "<td><a href='#openModalEdit' onclick='modalFunc(" . $row['id'] . ")'><img src='images/edit.jpg' id='edit'></a></td>";
+      $table .= "<td>Time stamp</td><td><a href='#openModalDelete'><img src='images/delete.jpg' id='delete'></a></td>";
+      $table .= "<td><a href='#openModalEdit' onclick='editFunc(" . $row['id'] . ")'><img src='images/edit.jpg' id='edit'></a></td>";
       $table .= "</tr>";
-
+      $id = $row['id'];
    }
 
    $table .= "</table>";
@@ -120,7 +118,7 @@ catch (PDOException $ex)
 ?>
 
 
-<h2>Items Ready for Shipment</h2>
+<h2>Orders Ready for Shipment</h2>
 
 </div>
 
@@ -129,7 +127,9 @@ catch (PDOException $ex)
       <a href="#close" title="Close" class="close">X</a>
       <p>Are you sure you want to delete this order?</p>
       <div id="deleteMessage"></div>
-      <input type="button" value="Confirm"/>
+      <form action="orders.php">  
+          <input type="submit" value="Confirm" onclick="deleteFunc(<?php echo $id;?>)">
+      </form>
    </div>
 </div>
 
@@ -138,7 +138,9 @@ catch (PDOException $ex)
       <a href="#close" title="Close" class="close">X</a>
       <p>Edit Customer Info</p>
       <div id="editMessage"></div>
-      <input type="button" value="Okay"/>
+      <form action="orders.php">
+          <input type="submit" value="Confirm" onclick="editFunc(<?php echo $id;?>)">
+      </form>
    </div>
 </div>
 
