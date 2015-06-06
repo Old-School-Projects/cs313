@@ -118,7 +118,6 @@ catch (PDOException $ex)
 ?>
 
 
-<h2>Orders Ready for Shipment</h2>
 
 </div>
 
