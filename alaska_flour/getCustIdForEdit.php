@@ -58,7 +58,7 @@ catch (PDOException $ex)
 //$query = "SELECT * FROM customer LEFT OUTER JOIN orders ON customer.id = orders.customer_id LEFT OUTER JOIN food_item ON orders.id = food_item.id WHERE orders.customer_id=$id;";
 //$query = "SELECT * FROM food_item WHERE id = $id";
 //$query = "SELECT * FROM customer c LEFT OUTER JOIN foodOrder f ON c.id = f.order_id LEFT OUTER JOIN food_item fi ON fi.id = f.food_item_id WHERE order_id = $id;";
-$query = "SELECT * FROM customer c LEFT OUTER JOIN orders o ON c.id = o.customer_id LEFT OUTER JOIN foodorder fo ON fo.order_id=o.id LEFT OUTER JOIN food_item fi ON fo.food_item_id=fi.id";
+$query = "SELECT * FROM customer c LEFT OUTER JOIN orders o ON c.id = o.customer_id LEFT OUTER JOIN foodorder fo ON fo.order_id=o.id LEFT OUTER JOIN food_item fi ON fo.food_item_id=fi.id WHERE fo.order_id=$id";
 $stmt = $db->query($query);
 $counter = 0;
 
@@ -76,6 +76,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 	$count++;
 	
 }
+
 
 
 

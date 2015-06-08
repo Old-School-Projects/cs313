@@ -67,11 +67,17 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $db->exec($query);
 
-$query = "DELETE FROM foodorder WHERE food_item_id = $id;";
+$query = "DELETE FROM order WHERE customer_id = $id";
 
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $db->exec($query);
+
+// $query = "DELETE FROM foodorder WHERE order_id = ;";
+
+// $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+// $db->exec($query);
 
 $query = "DELETE FROM foodorder WHERE order_id = $id;";
 

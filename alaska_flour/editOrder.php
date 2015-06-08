@@ -3,6 +3,7 @@
 $id = $_POST['customerId'];
 
 
+
 try
 {
 
@@ -57,6 +58,15 @@ catch (PDOException $ex)
 }
 
 
+// $query = "SELECT * FROM food_item fi JOIN foodorder fo ON fi.id=fo.food_item_id LEFT OUTER JOIN orders o ON fo.order_id=o.id WHERE o.customer_id=$id"; //WHERE orders.customer_id=$id;";
+// $stmt = $db->query($query);
+
+echo $id;
+
+// while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+// {
+//   echo $row['title'] . " - QUANTITY: " . $row['count'] . "<br />";
+// }
 
 
 
@@ -73,16 +83,11 @@ catch (PDOException $ex)
    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
    <script src="script.js"></script>
    <script src="orderscript.js"></script>
-   <script type="text/javascript">
-    setTimeout(function(){
-        lengthCheck();
-      }, 3000);
-   </script>
    <title>Alaska Flour | Orders</title>
 </head>
-<body id="center">
+<body>
   <h1>Order Edit</h1>
-  
+  <div id="center"></div>
 </body>
 </html>
 

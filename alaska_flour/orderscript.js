@@ -28,13 +28,21 @@ function ajaxFunc(id) {
 
 }
 
+// function editFunc(id) {
+// 	var divId = "#editMessage";
+
+// 	$.post("getCustIdForEdit.php", {customerId: id}, function(results){
+// 		$(divId).html(results);
+// 	});
+
+// }
+
 function editFunc(id) {
-	var divId = "#editMessage";
-
-	$.post("getCustIdForEdit.php", {customerId: id}, function(results){
-		$(divId).html(results);
-	});
-
+	var orderInfo = "#center";
+	alert(id);
+	$.post("editOrder.php", {customerId: id}, function(results){
+		$(orderInfo).html(results);
+	})
 }
 
 function deleteFunc(id) {

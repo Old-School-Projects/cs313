@@ -69,6 +69,7 @@ catch (PDOException $ex)
    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
    <script src="script.js"></script>
    <title>Alaska Flour | Customers</title>
+   <link rel='shortcut icon' href='images/icon.ico'>
 </head>
 <body>
 
@@ -83,10 +84,10 @@ catch (PDOException $ex)
 </div>
 <h2>Customers</h2>
 <?php
-   $query = "SELECT * FROM customer";
+   $query = "SELECT * FROM customer JOIN address a ON a.id=customer.id";
 
 
-   $table = "<table class='customers'><tr><th>Last</th><th>First</th><th>Phone Number</th></tr>";
+   $table = "<table class='customers'><tr><th>Last</th><th>First</th><th>Phone Number</th><th>city</th></tr>";
 
 
    $stmt = $db->query($query);
@@ -95,7 +96,8 @@ catch (PDOException $ex)
       $table .= '<tr>';
       $table .= '<td>' . $row['last_name'] . '</td>';
       $table .= '<td>' . $row['first_name'] . '</td>';
-      $table .= '<td>' . $row['phone_num'] . '</td>'; 
+      $table .= '<td>' . $row['phone_num'] . '</td>';
+      $table .= '<td>' . $row['city'] . '</td>';
       $table .= '</tr>';
    }
 

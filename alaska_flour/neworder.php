@@ -120,6 +120,7 @@ catch (PDOException $ex)
    <script src="script.js"></script>
    <script src="orderscript.js"></script>
    <title>Alaska Flour | New Order</title>
+   <link rel='shortcut icon' href='images/icon.ico'>
 </head>
 <body>
 

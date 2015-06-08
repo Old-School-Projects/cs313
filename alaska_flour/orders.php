@@ -78,6 +78,7 @@ catch (PDOException $ex)
         lengthCheck();
       }, 3000);
    </script>
+   <link rel='shortcut icon' href='images/icon.ico'>
    <title>Alaska Flour | Orders</title>
 </head>
 <body>
@@ -106,7 +107,7 @@ catch (PDOException $ex)
       $table .= '<td><b>' . "<span id='spanTitle" . $row['id'] . "' onclick='ajaxFunc(" . $row['id'] . ");'>"
        . $row['first_name'] . " " . $row['last_name'] . "</span></b>" . "<div id='divDetails" . $row['id'] . "'></div></td>";
       $table .= "<td>Time stamp</td><td><a href='#openModalDelete'><img src='images/delete.jpg' id='delete'></a></td>";
-      $table .= "<td><a href='#openModalEdit' onclick='editFunc(" . $row['id'] . ")'><img src='images/edit.jpg' id='edit'></a></td>";
+      $table .= "<td><a href='#openModalEdit'><img src='images/edit.jpg' id='edit'></a></td>";
       $table .= "</tr>";
       $id = $row['id'];
    }
@@ -118,6 +119,7 @@ catch (PDOException $ex)
 ?>
 
 
+<h2>Orders Ready for Shipment</h2>
 
 </div>
 
@@ -127,7 +129,8 @@ catch (PDOException $ex)
       <p>Are you sure you want to delete this order?</p>
       <div id="deleteMessage"></div>
       <form action="orders.php">  
-          <input type="submit" value="Confirm" onclick="deleteFunc(<?php echo $id;?>)">
+          <input type="text" value="<?php echo $id;?>" name="customerId">
+          <input type="submit" value="Confirm">
       </form>
    </div>
 </div>
@@ -135,10 +138,10 @@ catch (PDOException $ex)
 <div id="openModalEdit" class="modalDialog">
    <div>
       <a href="#close" title="Close" class="close">X</a>
-      <p>Edit Customer Info</p>
+      <p>Are you sure you'd like to edit this order?</p>
       <div id="editMessage"></div>
-      <form action="orders.php">
-          <input type="submit" value="Confirm" onclick="editFunc(<?php echo $id;?>)">
+      <form action="editOrder.php">
+          <input type="submit" value="Confirm">
       </form>
    </div>
 </div>
