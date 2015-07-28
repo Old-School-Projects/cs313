@@ -1,13 +1,25 @@
 <?php
 
-$f_name = $_POST['first_name'];
-$l_name = $_POST["last_name"];
-$cust_phone = $_POST['cust_phone'];
-$str_name = $_POST['str_name'];
-$str_num = $_POST['str_num'];
-$city = $_POST['city'];
-$state = $_POST['state'];
-$zip = $_POST['zip'];
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+	$f_name = test_input($_POST['first_name']);
+	$l_name = test_input($_POST["last_name"]);
+	$cust_phone = test_input($_POST['cust_phone']);
+	$str_name = test_input($_POST['str_name']);
+	$str_num = test_input($_POST['str_num']);
+	$city = test_input($_POST['city']);
+	$state = test_input($_POST['state']);
+	$zip = test_input($_POST['zip']);
+}
+
+
+function test_input($data) {
+   $data = trim($data);
+   $data = stripslashes($data);
+   $data = htmlspecialchars($data);
+   return $data;
+}
+
+// Items to order
 $item_01 = $_POST['item_01'];
 $item_01_title = "Cream of Barley Breakfast Cereal #1";
 $item_02 = $_POST['item_02'];
@@ -139,7 +151,7 @@ catch (PDOException $ex)
 	<h2>New Order</h2>
 	<form action="#" method="post">
 		<div id="customer_info">
-		<label>First Name </label><input type="text" name="first_name" id="first_name"><br />
+		<label>First Name </label><input type="text" name="first_name" id="first_name" autofocus><br />
 		<label>Last Name </label><input type="text" name="last_name" id="last_name"><br />
 		<label>Phone </label><input type="text" name="cust_phone" id="cust_phone"><br />
 		<h4>Address</h4>
@@ -356,6 +368,7 @@ catch (PDOException $ex)
 
 //the isset is to make sure that it doesn't try to run the query when this page loads
 if (isset($f_name)) {
+	echo "FIRST name is set: $f_name<br >";
 	//$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 // insert customer info
 $query = $db->prepare("INSERT INTO customer (first_name,last_name,phone_num) VALUES (:f_name, :l_name, :cust_phone)");
@@ -368,19 +381,26 @@ $customerId = $db->lastInsertId();
 
 // insert address info
 //$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-$query = $db->prepare("INSERT INTO address (street_name, street_num, city, state, zip) VALUES (:str_name, :str_num, :city, :state, :zip)");
+echo "Last name and num set: $l_name<br >";
+$query = $db->prepare("INSERT INTO address (street_name, street_num, city, state, zip,  customer) VALUES (:str_name, :str_num, :city, :state, :zip, :customer)");
 $query->bindParam(':str_name', $str_name, PDO::PARAM_STR);
 $query->bindParam(':str_num', $str_num, PDO::PARAM_INT);
 $query->bindParam(':city', $city, PDO::PARAM_STR);
 $query->bindParam(':state', $state, PDO::PARAM_STR);
 $query->bindParam(':zip', $zip, PDO::PARAM_INT);
+$query->bindParam(':customer', $customerId, PDO::PARAM_INT);
 $query->execute();
 
 // insert new order
 //$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+echo "ADDRESS SET: $str_num $str_name <br >";
 
-$query = $db->prepare("INSERT INTO orders (customer_id) VALUES ('$customerId')");
+date_default_timezone_set('America/Anchorage');
+
+//$d=mktime(11, 14, 54, 8, 12, 2014);
+$timeOfOrder = date("m-d h:i:sa");
+
+$query = $db->prepare("INSERT INTO orders (customer_id, orderDate) VALUES ('$customerId', '$timeOfOrder')");
 
 $query->execute();
 
@@ -392,19 +412,20 @@ foreach ($order_array as $key => $value){
 	if ($value > 0){
 		echo $value . " " . $key . "<br />";
 		//$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$query = $db->prepare("INSERT INTO  food_item (title, count) VALUES (:key, :value)");
+		$query = $db->prepare("INSERT INTO  food_item (title, count, order_id) VALUES (:key, :value, :customerId)");
 		$query->bindParam(':key', $key, PDO::PARAM_STR);
 		$query->bindParam(':value', $value, PDO::PARAM_INT);
+		$query->bindParam(':customerId', $customerId, PDO::PARAM_INT);
 		$query->execute();
 
-		$f_item_id = $db->lastInsertId();
+		//$f_item_id = $db->lastInsertId();
 
 		// foodorder
 		//$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$query = $db->prepare("INSERT INTO foodorder (food_item_id, order_id) VALUES (:f_item_id, :orderId)");
-		$query->bindParam(':f_item_id', $f_item_id, PDO::PARAM_INT);
-		$query->bindParam(':orderId', $orderId, PDO::PARAM_INT);
-		$query->execute();
+		// $query = $db->prepare("INSERT INTO foodorders (food_item_id, order_id) VALUES (:f_item_id, :orderId)");
+		// $query->bindParam(':f_item_id', $f_item_id, PDO::PARAM_INT);
+		// $query->bindParam(':orderId', $orderId, PDO::PARAM_INT);
+		// $query->execute();
 
 	}
 			 

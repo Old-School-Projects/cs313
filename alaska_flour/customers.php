@@ -84,7 +84,8 @@ catch (PDOException $ex)
 </div>
 <h2>Customers</h2>
 <?php
-   $query = "SELECT * FROM customer JOIN address a ON a.id=customer.id";
+   //$query = "SELECT * FROM customer JOIN address a ON a.id=customer.id";
+    $query = "select * from customer c join address a ON a.customer=c.id";
 
 
    $table = "<table class='customers'><tr><th>Last</th><th>First</th><th>Phone Number</th><th>city</th></tr>";

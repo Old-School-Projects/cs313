@@ -40,7 +40,6 @@ function loadDatabase()
 
           $db = new PDO("mysql:host=$dbHost:$dbPort;dbname=$dbName", $dbUser, $dbPassword);
      } 
-     //echo "host:$dbHost:$dbPort dbName:$dbName user:$dbUser password:$dbPassword<br >\n";
 
      return $db;
 
@@ -56,12 +55,13 @@ catch (PDOException $ex)
 }
 
 //$query = "SELECT title, count FROM customer c LEFT OUTER JOIN foodOrder f ON c.id = f.order_id LEFT OUTER JOIN food_item fi ON fi.id = f.food_item_id WHERE order_id = $id;";
-$query = "SELECT * FROM food_item fi JOIN foodorder fo ON fi.id=fo.food_item_id LEFT OUTER JOIN orders o ON fo.order_id=o.id WHERE o.customer_id=$id"; //WHERE orders.customer_id=$id;";
+//$query = "SELECT * FROM food_item fi JOIN foodOrders fo ON fi.id=fo.food_item_id LEFT OUTER JOIN orders o ON fo.order_id=o.id WHERE o.customer_id=$id"; //WHERE orders.customer_id=$id;";
+$query = "SELECT title, count FROM food_item WHERE order_id=$id;";
 $stmt = $db->query($query);
 
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 {
-	echo $row['title'] . " - QUANTITY: " . $row['count'] . "<br />";
+	echo "<input type='checkbox'>" . $row['title'] . " - QUANTITY: " . $row['count'] . "<br />";
 }
 
 ?>

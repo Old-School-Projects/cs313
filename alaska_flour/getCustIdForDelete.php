@@ -1,6 +1,6 @@
 <?php
-$id = $_POST['customerId'];
 
+$id = $_POST['customerId'];
 
 try
 {
@@ -55,7 +55,21 @@ catch (PDOException $ex)
    die();
 }
 
-$query = "DELETE FROM address WHERE id = $id;";
+echo "ID: " . $id;
+
+$query = "DELETE FROM orders WHERE customer_id = $id;";
+
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$db->exec($query);
+
+$query = "DELETE FROM food_item WHERE order_id = $id;";
+
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$db->exec($query);
+
+$query = "DELETE FROM address WHERE customer = $id;";
 
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -67,25 +81,7 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $db->exec($query);
 
-$query = "DELETE FROM order WHERE customer_id = $id";
-
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-$db->exec($query);
-
-// $query = "DELETE FROM foodorder WHERE order_id = ;";
-
-// $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-// $db->exec($query);
-
-$query = "DELETE FROM foodorder WHERE order_id = $id;";
-
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-$db->exec($query);
-
-
+header("Location: orders.php");
 
 ?>
 

@@ -21,8 +21,8 @@ function ajaxFunc(id) {
 
 	$.post("getCustomerId.php", {customerId: id}, function(results){
 		$(divId).html(results);	
-		$(divId).slideToggle("slow");
-
+		$(divId).slideToggle("fast");
+		//$(divId).toggle();
 		//$("#editMessage").html(results);	
 	});
 

@@ -96,7 +96,7 @@ catch (PDOException $ex)
 
 <?php
 
-   $query = "SELECT * FROM customer";
+   $query = "SELECT orders.orderDate, customer.first_name, customer.last_name, customer.id FROM orders INNER JOIN customer ON orders.customer_id=customer.id;";
    $table = "<table class='customers' id='orders'><th></th><th>Customer</th><th>Time of Order</th><th>  </th><th>  </th>";
    $stmt = $db->query($query);
    $id;
@@ -106,7 +106,7 @@ catch (PDOException $ex)
       $table .= "<td><a href='#openModalConfirm' onclick='completeFunc(" . $row['id'] . ")'><img src='images/complete.jpg' id='complete'></a></td>";
       $table .= '<td><b>' . "<span id='spanTitle" . $row['id'] . "' onclick='ajaxFunc(" . $row['id'] . ");'>"
        . $row['first_name'] . " " . $row['last_name'] . "</span></b>" . "<div id='divDetails" . $row['id'] . "'></div></td>";
-      $table .= "<td>Time stamp</td><td><a href='#openModalDelete'><img src='images/delete.jpg' id='delete'></a></td>";
+      $table .= "<td>" . $row['orderDate'] . "</td><td><a href='#openModalDelete'><img src='images/delete.jpg' id='delete'></a></td>";
       $table .= "<td><a href='#openModalEdit'><img src='images/edit.jpg' id='edit'></a></td>";
       $table .= "</tr>";
       $id = $row['id'];
@@ -125,11 +125,12 @@ catch (PDOException $ex)
 
 <div id="openModalDelete" class="modalDialog">
    <div>
+    <?php  ?>
       <a href="#close" title="Close" class="close">X</a>
       <p>Are you sure you want to delete this order?</p>
       <div id="deleteMessage"></div>
-      <form action="orders.php">  
-          <input type="text" value="<?php echo $id;?>" name="customerId">
+      <form action="getCustIdForDelete.php" method="POST">
+          <input type="hidden" name="customerId" value="<?php echo $id ?>"> 
           <input type="submit" value="Confirm">
       </form>
    </div>
