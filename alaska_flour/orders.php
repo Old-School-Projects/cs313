@@ -102,6 +102,7 @@ catch (PDOException $ex)
    $id;
    while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
    {
+    echo $row;
       $table .= "<tr>";
       $table .= "<td><a href='#openModalConfirm' onclick='completeFunc(" . $row['id'] . ")'><img src='images/complete.jpg' id='complete'></a></td>";
       $table .= '<td><b>' . "<span id='spanTitle" . $row['id'] . "' onclick='ajaxFunc(" . $row['id'] . ");'>"
