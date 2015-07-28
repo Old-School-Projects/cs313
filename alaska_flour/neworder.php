@@ -370,17 +370,6 @@ catch (PDOException $ex)
 if (isset($f_name)) {
 	echo "FIRST name is set: $f_name<br >";
 	//$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-	echo "Last name and num set: $l_name<br >";
-$query = $db->prepare("INSERT INTO address (street_name, street_num, city, state, zip,  customer) VALUES (:str_name, :str_num, :city, :state, :zip, :customer)");
-$query->bindParam(':str_name', $str_name, PDO::PARAM_STR);
-$query->bindParam(':str_num', $str_num, PDO::PARAM_INT);
-$query->bindParam(':city', $city, PDO::PARAM_STR);
-$query->bindParam(':state', $state, PDO::PARAM_STR);
-$query->bindParam(':zip', $zip, PDO::PARAM_INT);
-$query->bindParam(':customer', $customerId, PDO::PARAM_INT);
-$query->execute();
-
 // insert customer info
 $query = $db->prepare("INSERT INTO customer (first_name,last_name,phone_num) VALUES (:f_name, :l_name, :cust_phone)");
 $query->bindParam(':f_name', $f_name, PDO::PARAM_STR);
@@ -392,7 +381,15 @@ $customerId = $db->lastInsertId();
 
 // insert address info
 //$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+echo "Last name and num set: $l_name<br >";
+$query = $db->prepare("INSERT INTO address (street_name, street_num, city, state, zip,  customer) VALUES (:str_name, :str_num, :city, :state, :zip, :customer)");
+$query->bindParam(':str_name', $str_name, PDO::PARAM_STR);
+$query->bindParam(':str_num', $str_num, PDO::PARAM_INT);
+$query->bindParam(':city', $city, PDO::PARAM_STR);
+$query->bindParam(':state', $state, PDO::PARAM_STR);
+$query->bindParam(':zip', $zip, PDO::PARAM_INT);
+$query->bindParam(':customer', $customerId, PDO::PARAM_INT);
+$query->execute();
 
 // insert new order
 //$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
